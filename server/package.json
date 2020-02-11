@@ -1,0 +1,17 @@
+{
+	"name": "asm6f-lang-server",
+	"version": "0.0.1",
+	"author": "Jack Fox",
+	"license": "MIT",
+	"engines": {
+		"node": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DubiousDoggo/asm6f-lang"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^5.2.1"
+	},
+	"scripts": {}
+}

@@ -27,15 +27,37 @@
 	"contributes": {
 		"configuration": {
 			"type": "object",
-			"title": "Example configuration",
+			"title": "asm6f lang configuration",
 			"properties": {
-				"languageServerExample.maxNumberOfProblems": {
+				"asm6fLang.opcodeCapitalization": {
 					"scope": "resource",
-					"type": "number",
-					"default": 100,
-					"description": "Controls the maximum number of problems produced by the server."
+					"type": "string",
+					"enum": [
+						"uppercase",
+						"lowercase"
+					],
+					"default": "uppercase",
+					"description": "controls the capitalization of opcodes in autocomplete (and TODO auto formatting)"
 				},
-				"languageServerExample.trace.server": {
+				"asm6fLang.assemblerPath": {
+					"scope": "resource",
+					"type": "string",
+					"default": "asm6f_64",
+					"description": "The path of the asm6f assembler."
+				},
+				"asm6fLang.mainFile": {
+					"scope": "resource",
+					"type": "string",
+					"default": "main.asm",
+					"description": "The file to assemble on validation."
+				},
+				"asm6fLang.outFile": {
+					"scope": "resource",
+					"type": "string",
+					"default": "",
+					"description": "The file to produce on validation."
+				},
+				"asm6fLang.trace.server": {
 					"scope": "window",
 					"type": "string",
 					"enum": [
@@ -47,7 +69,27 @@
 					"description": "Traces the communication between VS Code and the language server."
 				}
 			}
-		}
+		},
+		"languages": [
+			{
+				"id": "asm6f",
+				"aliases": [
+					"6502 Assembly",
+					"asm6f"
+				],
+				"extensions": [
+					".asm"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "asm6f",
+				"scopeName": "source.asm",
+				"path": "./syntaxes/asm6f.tmLanguage.json"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
@@ -60,6 +102,6 @@
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
 		"tslint": "^5.16.0",
-		"typescript": "^3.6.4"
+		"typescript": "^3.7.0"
 	}
 }

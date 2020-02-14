@@ -1,0 +1,112 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "6502 Assembly",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#directives"
+		},
+		{
+			"include": "#instructions"
+		},
+		{
+			"include": "#literals"
+		},
+		{
+			"include": "#operators"
+		}
+	],
+	"repository": {
+		"instructions": {
+			"name": "keyword.other.instruction.asm6f",
+			"match": "\\b(?i:adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dec|dex|dey|eor|inc|inx|iny|jmp|jsr|lda|ldx|ldy|lsr|nop|ora|pha|php|pla|plp|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stx|sty|tax|tay|tsx|txa|txs|tya)\\b"
+		},
+		"literals": {
+			"patterns": [
+				{
+					"name": "constant.numeric.decimal.asm6f",
+					"match": "\\b[0-9]+\\b"
+				},
+				{
+					"name": "constant.numeric.hex.asm6f",
+					"match": "\\$[0-9a-fA-F]+\\b"
+				},
+				{
+					"name": "constant.numeric.binary.asm6f",
+					"match": "\\%[0-1]+\\b"
+				}
+			]
+		},
+		"comments": {
+			"name": "comment.line.asm6f",
+			"match": ";.*$"
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operators.immediate.asm6f",
+					"match": "#"
+				},
+				{
+					"name": "keyword.operators.word.asm6f",
+					"match": "\\.(?i:mod|bitnot|bitand|bitor|shl|shr|and|or|not|xor)\\b"
+				},
+				{
+					"name": "keyword.operators.asm6f",
+					"match": "=|<>|:=|\\+|-|\\*|/|\\&|~|\\||<<|>>|\\&\\&|\\|\\||!|<|>|<=|>="
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.asm6f",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.asm6f",
+					"match": "\\\\."
+				}
+			]
+		},
+		"directives": {
+			"patterns": [
+				{
+					"name": "keyword.control.directive.asm6f",
+					"match": "\\.?\\b(?i:enum|ende|macro|endm|equ|include|incsrc|incbin|bin|db|dw|byte|word|dc\\.?b|dc\\.?w|dl|dh|ds\\.?b|ds\\.?w|pad|org|align|fillvalue|base|error|ignorenl|endinl|unstable|hunstable)\\b"
+				},
+				{
+					"include": "#directives.hex"
+				},
+				{
+					"include": "#directives.ines"
+				}
+			]
+		},
+		"directives.ines": {
+			"patterns": [
+				{
+					"name": "keyword.control.directive.ines.asm6f",
+					"match": "\\.?\\b(?i:inesprg|ineschr|inesmap|inesmir|nes2chrram|nes2prgram|nes2sub|nes2tv|nes2vs|nes2bram|nes2chrbram)\\b"
+				}
+			]
+		},
+		"directives.hex": {
+			"begin": "\\.?\\b(?i:hex)\\b",
+			"end": "$",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.directive.hex.asm6f"
+				}
+			},
+			"patterns": [
+				{
+					"name": "constant.numeric.hex.asm6f",
+					"match": "\\b[0-9a-fA-F]+\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.asm"
+}
